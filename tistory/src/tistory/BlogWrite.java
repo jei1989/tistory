@@ -47,6 +47,7 @@ public class BlogWrite {
     static String USER_PASSWD;
     static String API_PASSWORD;
 	
+    
     public XmlRpcClient client  = null;
     public XmlRpcClientConfigImpl config = null; 
     
@@ -359,7 +360,7 @@ public class BlogWrite {
 	    			if( (  cal.get(Calendar.DAY_OF_MONTH) == todaycal.get(Calendar.DAY_OF_MONTH)   )
 	    					|| ( cal.get(Calendar.HOUR_OF_DAY) >=23 && cal.get(Calendar.MINUTE) >= 50 ))
 	    			{
-    				
+	    				
 	  		    	wcontent = wcontent
 							+
 					"<table>" +
