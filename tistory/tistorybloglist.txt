@@ -1,0 +1,14 @@
+다음뉴스[MS]|https://api.blog.naver.com/xmlrpc|hjya1989|hjya1989|51c8f6960c202713490e039d5dd67203|hyun1255632|MS|euc-kr
+네이버뉴스[MS]|https://api.blog.naver.com/xmlrpc|hjya1989|hjya1989|51c8f6960c202713490e039d5dd67203|hyun1255632|MS|UTF-8
+다음뉴스[구글]|https://api.blog.naver.com/xmlrpc|hjya1989|hjya1989|51c8f6960c202713490e039d5dd67203|hyun1255632|구글|euc-kr
+네이버뉴스[구글]|https://api.blog.naver.com/xmlrpc|hjya1989|hjya1989|51c8f6960c202713490e039d5dd67203|hyun1255632|구글|UTF-8
+다음뉴스[태양의후예]|https://api.blog.naver.com/xmlrpc|hjya1989|hjya1989|51c8f6960c202713490e039d5dd67203|hyun1255632|태양의후예|euc-kr
+네이버뉴스[태양의후예]|https://api.blog.naver.com/xmlrpc|hjya1989|hjya1989|51c8f6960c202713490e039d5dd67203|hyun1255632|태양의후예|UTF-8
+다음뉴스[김지원]|https://api.blog.naver.com/xmlrpc|hjya1989|hjya1989|51c8f6960c202713490e039d5dd67203|hyun1255632|김지원|euc-kr
+네이버뉴스[김지원]|https://api.blog.naver.com/xmlrpc|hjya1989|hjya1989|51c8f6960c202713490e039d5dd67203|hyun1255632|김지원|UTF-8
+다음뉴스[진구]|https://api.blog.naver.com/xmlrpc|hjya1989|hjya1989|51c8f6960c202713490e039d5dd67203|hyun1255632|진구|euc-kr
+네이버뉴스[진구]|https://api.blog.naver.com/xmlrpc|hjya1989|hjya1989|51c8f6960c202713490e039d5dd67203|hyun1255632|진구|UTF-8
+다음뉴스[송혜교]|https://api.blog.naver.com/xmlrpc|hjya1989|hjya1989|51c8f6960c202713490e039d5dd67203|hyun1255632|송혜교|euc-kr
+네이버뉴스[송혜교]|https://api.blog.naver.com/xmlrpc|hjya1989|hjya1989|51c8f6960c202713490e039d5dd67203|hyun1255632|송혜교|UTF-8
+다음뉴스[송중기]|https://api.blog.naver.com/xmlrpc|hjya1989|hjya1989|51c8f6960c202713490e039d5dd67203|hyun1255632|송중기|euc-kr
+네이버뉴스[송중기]|https://api.blog.naver.com/xmlrpc|hjya1989|hjya1989|51c8f6960c202713490e039d5dd67203|hyun1255632|송중기|UTF-8

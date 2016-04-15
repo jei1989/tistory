@@ -1,0 +1,2 @@
+다음뉴스|euc-kr|http://tab.search.daum.net/dsa/search?w=news&m=rss&SortType=1&q=
+네이버뉴스|UTF-8|http://newssearch.naver.com/search.naver?where=rss&query=
