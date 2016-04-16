@@ -310,7 +310,7 @@ public class BlogWrite {
     	try{
     		Trace.trace("updatePost ================= ");
     		
-    		String wcontent = "";
+    		String wcontent = " ";
     		config.setServerURL(new URL(info[1]));
 	        //client.setConfig(config); 
     		
@@ -464,7 +464,7 @@ public class BlogWrite {
     	try{
     		Trace.trace("newPost ================= ");
     		
-    		String wcontent = "";
+    		String wcontent = " ";
 	    	Map<String, Object> contents = new HashMap<String, Object>();
 	    	
 	        String categories[] = new String[] {info[6]};    	

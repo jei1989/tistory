@@ -12,6 +12,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Vector;
 
@@ -110,6 +111,7 @@ public class RssWriter {
 	    	BufferedReader br = null;
 	    	String line = null;
 	    	Trace.trace(pathrssfile.toAbsolutePath().toString());
+	    	SimpleDateFormat zformat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
 	    	
 	    	if( new File(pathrssfile.toAbsolutePath().toString()).exists() )
 	    	{
@@ -168,57 +170,67 @@ public class RssWriter {
 	    			    		String newstr = "";
 	    			    		boolean iscontinue = true;
 	    			    		
-	    			    		for (FeedMessage message : feed.getMessages()) 
+	    			    		
+	    			    		for (FeedMessage message : feed.getMessages())
 	    			    		{
-	    			    			if( iscontinue )
-    			    				{
-	    			    				String tempstr = "";
+
+	    			    			Date mdate =  zformat.parse(message.pubDate);//
+	    			    			Date today_date = new Date();
+	    			    			Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+	    			    			cal.setTime(mdate);
+	    			    			Calendar todaycal = Calendar.getInstance(Locale.ENGLISH);
+    			    			
+    			    			
+	    			    			if(  (cal.get(Calendar.DAY_OF_MONTH) == todaycal.get(Calendar.DAY_OF_MONTH)) || (( cal.get(Calendar.HOUR_OF_DAY) >=23 && cal.get(Calendar.MINUTE) >= 50 ))   )
+	    			    			{
 	    			    			
-	    			    				String descript = message.description.replaceAll("\\|", "");
-	    			    				descript = message.description.replaceAll("\\|", "");
-		    			    			tempstr = message.title.replaceAll("\\|", "") + "|" + message.link + "|" +  descript + "|" + message.pubDate + "|" + message.author.replaceAll("\\|", "") + "|" + message.thumbnail+ "\n";
-	    			    				
-		    			    					    			    			
-			    			    			for( int k=0 ; k < vec.size() && iscontinue ; k++ )
-			    			    			{
-				    			    				if( vec.elementAt(k).toString().trim().equals(tempstr.trim()) )
-				    			    				{
-				    			    					tempstr = "";
-				    			    					iscontinue = false;
-				    			    				}
-				    			    				
-			    			    			}
-			    			    		newstr = newstr + tempstr;
-	    			    			}
+		    			    			if( iscontinue )
+	    			    				{
+		    			    				String tempstr = "";
+		    			    			
+		    			    				String descript = message.description.replaceAll("\\|", "");
+		    			    				descript = message.description.replaceAll("\\|", "");
+			    			    			tempstr = message.title.replaceAll("\\|", "") + "|" + message.link + "|" +  descript + "|" + message.pubDate + "|" + message.author.replaceAll("\\|", "") + "|" + message.thumbnail+ "\n";
+		    			    				
+			    			    					    			    			
+				    			    			for( int k=0 ; k < vec.size() && iscontinue ; k++ )
+				    			    			{
+					    			    				if( vec.elementAt(k).toString().trim().equals(tempstr.trim()) )
+					    			    				{
+					    			    					tempstr = "";
+					    			    					iscontinue = false;
+					    			    				}
+					    			    				
+				    			    			}
+				    			    		newstr = newstr + tempstr;
+		    			    			}
+	    			    			}//if(  (cal.get(Calendar.DAY_OF_MONTH) == todaycal.get(Calendar.DAY_OF_MONTH)) || (( cal.get(Calendar.HOUR_OF_DAY) >=23 && cal.get(Calendar.MINUTE) >= 50 ))   )
 		    			    		
 	    			    		}
-	    			    		
-	    			    		
 	    			    		
 	    			    		reader.close();
 	    			    		input.close();
 	    			    		
 	    			    		FileOutputStream out = new FileOutputStream(new File(pathimsi.toAbsolutePath().toString()),false);
 	    			    		OutputStreamWriter stream = new OutputStreamWriter(out,charset);
-    			    			
 	    			    		
     			    			if( newstr.trim().equals("") || newstr.trim().equals(null) || newstr.trim().equals(" "))
     			    			{
 
-	    			    			SimpleDateFormat zformat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
 				    					for( int k=0 ; k < vec.size() ; k++ )
 	    	    			    		{	    			    			
 			    			    			try{			    			    			
 					    						String[] strarray = (vec.elementAt(k)).toString().split("\\|");
 					    						//Trace.trace( strarray[0] + " : " + strarray[1] + " : " + strarray[2] + " : " + strarray[3] + " : " + strarray[4]  );
-					    						Date mdate =  zformat.parse(strarray[3]);
+					    						Date mdate =  zformat.parse(  strarray[3]);
 					    						
 				    			    			Date today_date = new Date();
 				    			    			Calendar cal = Calendar.getInstance(Locale.ENGLISH);
 				    			    			cal.setTime(mdate);
 				    			    			Calendar todaycal = Calendar.getInstance(Locale.ENGLISH);    			    				
 		    			    				
-			    			    				if(  cal.get(Calendar.DAY_OF_MONTH) == todaycal.get(Calendar.DAY_OF_MONTH)   )
+			    			    				//if(  cal.get(Calendar.DAY_OF_MONTH) == todaycal.get(Calendar.DAY_OF_MONTH)   )
+				    			    			if(  (cal.get(Calendar.DAY_OF_MONTH) == todaycal.get(Calendar.DAY_OF_MONTH)) || (( cal.get(Calendar.HOUR_OF_DAY) >=23 && cal.get(Calendar.MINUTE) >= 50 ))   )
 			    			    				{
 			
 			       	    			    			stream.write(vec.elementAt(k).toString() + "\n");
@@ -231,21 +243,31 @@ public class RssWriter {
 	    	    			    		}
 
     			    				
-    			    			}
+    			    			}//if( newstr.trim().equals("") || newstr.trim().equals(null) || newstr.trim().equals(" "))
+    			    			/*************************/
     			    			else
     			    			{
+    			    				/*************************
+    			    				if (newstr.length() == 0 && vec.size() ==  0 )
+    			    				{
+    			    					List mess = feed.getMessages();
+    			    					FeedMessage message = (FeedMessage)mess.get(0);
+    			    					newstr = message.title.replaceAll("\\|", "") + "|" + message.link + "|" +  message.description.replaceAll("\\|", "") + "|" + message.pubDate + "|" + message.author.replaceAll("\\|", "") + "|" + message.thumbnail+ "\n";
+    			    					stream.write(newstr);	
+    			    				}
+    			    				
+    	    			    		     			    				
+    			    				/*************************/
+    			    				
+    			    				Trace.trace( " new string NOT blank START :: "+  vec.size() + " ::: "  + newstr );
     			    				stream.write(newstr);
-    			    				
-    			    				Trace.trace( " new string NOT blank START "  );
-    			    				//stream.write("\n\n\n");
-    			    				
-    	    			    		for( int k=0 ; k < vec.size() ; k++ )
+    			    				for( int k=0 ; k < vec.size() ; k++ )
     	    			    		{
     	    			    			stream.write(vec.elementAt(k).toString() + "\n");
-    	    			    		}   
-    	    			    		
+    	    			    		}
     	    			    		Trace.trace( " new string NOT blank END  "  );
     			    			}
+    			    			/*************************/
     			    			///Trace.trace(newstr + vectemp);
     			    			
     			    			stream.close();
@@ -253,7 +275,7 @@ public class RssWriter {
     			    			
 	    			    		
 	    			    		
-	    			    	}
+	    			    	}//if( new File(pathimsi.toAbsolutePath().toString()).exists() )
 	    			    	else
 	    			    	{
 	    			    		FileOutputStream out = new FileOutputStream(new File(pathimsi.toAbsolutePath().toString()),false);
@@ -261,10 +283,9 @@ public class RssWriter {
 	    			    		
 	    			    		String tempstr = "";
 	    			    		for (FeedMessage message : feed.getMessages()) {
-	    			    			
+	    			    			Trace.trace(" file not fountd ============================= ");
 	    			    			try{
-	    			    				Trace.trace( "(message.pubDate).toString() == " + (message.pubDate).toString() );
-		    			    			SimpleDateFormat zformat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
+	    			    				//Trace.trace( "(message.pubDate).toString() == " + (message.pubDate).toString() );
 		    			    			
 		    			    			Date mdate =  zformat.parse(message.pubDate);//
 		    			    			Date today_date = new Date();
@@ -274,16 +295,16 @@ public class RssWriter {
 	    			    			
 	    			    			
 		    			    			if(  cal.get(Calendar.DAY_OF_MONTH) == todaycal.get(Calendar.DAY_OF_MONTH)   ){
-		    			    				Trace.trace( " tempfile == " + tempfile + " :: cal.get(Calendar.DAY_OF_MONTH) == "  + cal.get(Calendar.DAY_OF_MONTH));
+		    			    				//Trace.trace( " [same time] tempfile == " + tempfile + " :: cal.get(Calendar.DAY_OF_MONTH) == "  + cal.get(Calendar.DAY_OF_MONTH)+ ":"  + cal.get(Calendar.MINUTE));
 		    			    				tempstr = tempstr + message.title + "|" + message.link + "|" +  message.description + "|" + message.pubDate + "|" + message.author + "|" + message.thumbnail+ "\n";
 		    			    			}
 		    			    			/***********/
 		    			    			else
 		    			    			{
-		    			    				Trace.trace( " tempfile == " + tempfile + " :: Calendar.HOUR_OF_DAY 11111 == "  + cal.get(Calendar.HOUR_OF_DAY));
+		    			    				//Trace.trace( " [different time] tempfile == " + tempfile + " :: Calendar.HOUR_OF_DAY 11111 == "  + cal.get(Calendar.HOUR_OF_DAY));
 		    			    				if( cal.get(Calendar.HOUR_OF_DAY) >=23 && cal.get(Calendar.MINUTE) >= 50 )
 		    			    				{
-		    			    					Trace.trace( " tempfile == " + tempfile + " :: Calendar.HOUR_OF_DAY 22222 == "  + cal.get(Calendar.HOUR_OF_DAY) + " :: " + cal.get(Calendar.MINUTE));
+		    			    					//Trace.trace( " [different inner time] tempfile == " + tempfile + " :: Calendar.HOUR_OF_DAY 22222 == "  + cal.get(Calendar.HOUR_OF_DAY) + " :: " + cal.get(Calendar.MINUTE));
 		    			    					tempstr = tempstr + message.title + "|" + message.link + "|" +  message.description + "|" + message.pubDate + "|" + message.author + "|" + message.thumbnail+ "\n";
 		    			    				}
 		    			    				
